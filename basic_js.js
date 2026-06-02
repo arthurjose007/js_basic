@@ -547,8 +547,252 @@ var a = function (parameter1, parameter2) {// this are parameters
 a(1, 2);//arguments
 //arguments are the values that are passed to the function when it is called. they are also known as actual parameters. they are used to provide input to the function and they can be accessed using the arguments object inside the function.
 //first class function
-
+// functions as a function
+var a = function (parameter1, parameter2) {// this are parameters
+    console.log(parameter1);
+}
+function x(callback) {
+    callback(10, 20);
+}
+console.log(x(a));
+//or
+var a = function (parameter1, parameter2) {// this are parameters
+    console.log(parameter1);
+    return parameter1 + parameter2;
+}
+function x(callback) {
+    callback(10, 20);
+}
+console.log(x(a));
 // Arrow function
+var a = (parameter1, parameter2) => {
+    console.log(parameter1);
+    return parameter1 + parameter2;
+}
+//or
+var a = (parameter1, parameter2) => parameter1 + parameter2;
+console.log(a(10, 20));
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//call back funcitonin js.event listeners
+///What is a callback funciton in javascript?
+//a function that call a funciton is callback function.
+
+////////////////////////////////////////////////////////////////
+//javascript is a synchronous and single-threaded language. ////
+////
+////////////////////////////////////////////////////////////////
+setTimeout(function () {
+    console.log("timer");
+}, 5000);
+function x(y) {
+    console.log("x");
+    y();
+}
+x(function y() {
+    console.log("Y");
+});
+//A callback function is a function that is passed as an argument to another function and is executed after some operation has been completed. it is a way to ensure that a function is not executed until a certain event has occurred or a certain condition has been met. callback functions are commonly used in asynchronous programming, where they allow you to handle the results of an operation once it has completed without blocking the main thread of execution.
+
+
+
+document.getElementById("myButton").addEventListener("click", function xyc() {
+    console.log("Button clicked!", ++count);
+});
+
+
+//----------------------------------------------------------------------------------------
+function attachEventListener() {
+
+    let count = 0;
+    document.getElementById("myButton").addEventListener("click", function xyc() {
+        console.log("Button clicked!", ++count);
+    });
+}
+attachEventListener();
+//In this example, the function xyc is a callback function that is passed to the addEventListener method. it will be executed every time the button with the id "myButton" is clicked, and it will log the message "Button clicked!" along with the number of times the button has been clicked.
+
+//javaScript is a synchronous and single-threaded language
+
+
+// Power of Callbacks?
+
+//Deep about Event listeners
+
+//Closures Demo with Evernt Listeners
+
+//scope demo with event listeners
+
+//Garbage Collection and removeEVentListeners
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+//Event Loop
+function a() {
+    console.log("a");
+}
+a();
+console.log("end");
+
+//web API
+//window
+"1*----setTimeout()"
+"2*----Dom Apis"
+"3*----fetch()"
+"4*----Local Storage"
+"5*----Console --api "
+"6*----Location"
+
+// browser super power 
+
+//it wrap up the all super power and give access  the the call stack or js engine.
+console.log("start");
+
+setTimeout(function cb() {
+    console.log("callback function");
+}, 5000);
+
+
+console.log("end");
+
+///////////////////////////////////////////////////////////////////////////////////////
+console.log("start");
+document.getElementById("btn").addEventListener("click", function cb() {
+    console.log("Button clicked!");
+});
+console.log("end");
+
+
+//the cb will save in hte callback queue
+//event loop job it to continuously monitor the call stack and the callback queue. 
+// if the call stack is empty then it will push the first function from the callback queue to the 
+// call stack and execute it. if the call stack is not empty then it will wait until the
+//  call stack is empty and then it will push the first function from the callback queue
+// to the call stack and execute it.
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//fetch
+console.log("start");
+
+setTimeout(function cb() {
+    console.log("CB SetTimeout");
+}, 5000);
+
+fetch("https://jsonplaceholder.typicode.com/todos/1")
+    .then(function cb2(response) {
+        console.log("CB Fetch");
+
+    })
+console.log("end");
+
+//when you run it will send a call to hte jsonplaceholder API and then it will send  request to the server then it will give  response to to the cb2 will execute
+// in this case the first start wil print first then the end will print because it is in the call stack and it will execute first then the the event loop will continue to monitor the call stack  and it also see there are some task in the microtask queue cb2 give the chance to call stack it will run pop then go to the cb to call  stack then execute and
+//if the api is super fast like 50ms then the cb2 will execute  no this is where the microtask queue comes in to play. the microtask queue has higher priority than the callback queue. so if there is any function in the microtask queue then it will execute before
+//  the callback queue. so in this case the cb2 will execute before the cb of setTimeout because the cb2 is in the microtask queue and the cb of setTimeout is in the callback queue. so the output will be "start", "end", "CB Fetch", "CB SetTimeout" because the cb2 is in the microtask queue and it will execute before the cb of setTimeout which is in the callback queue.
+///////////////////////////////////////////////////////////////////////////////////////////
+//javaScript RunTime Environment
+//js Engine  --browser and node js
+//1*----Call Stack
+//2*----Web APIs
+//3*----Callback Queue
+//4*----Event Loop
+//5*----Microtask Queue 
+/////////////////////////////////////////////////////////////////////////////////
+//ECMAScript is a standard for scripting languages like JavaScript. it defines the syntax, 
+// semantics, and behavior of the language. ECMAScript is developed and maintained by the 
+// ECMA International organization. the latest version of ECMAScript is ECMAScript 2021 (ES12)
+//  which was released in June 2021. ECMAScript is the foundation of JavaScript and all modern
+//  JavaScript engines implement the ECMAScript specification to ensure compatibility across different 
+//platforms and browsers.
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//code -> parsing -> compiling -> execution
+//tokens 
+let a = 10;
+//token -> a, =, 10, ;
+//parsing -> it will check the syntax of the code and it will create an abstract syntax tree (AST) which is a tree representation of the code. it will also check for any syntax errors in the code and if there are any syntax errors then it will throw an error and stop the execution of the code.
+//compiling -> it will convert the AST into bytecode which is a low-level representation of the code that can be executed by the JavaScript engine. it will also optimize the code for better performance.
+//execution -> it will execute the bytecode and produce the output.
+
+//abstract syntax tree (AST) is a tree representation of the code that is generated by the parser. it is a hierarchical structure that represents the syntax of the code. each node in the tree represents a construct in the code such as a variable declaration, a function declaration, a loop, etc. the AST is used by the compiler to generate bytecode and optimize the code for better performance.
+//jit compilation
+
+//interpretter :- it will execute the code line by line and it will not optimize the code for better performance. it is slower than the compiler because it does not optimize the code.
+
+//compiler :- it will convert the code into bytecode and optimize the code for better performan ce. it is faster than the interpretter because it optimizes the code.
+
+//memory heap :- it is a region of memory that is used for dynamic memory allocation. it is used to store objects, arrays, and other data structures that are created at runtime. the memory heap is managed by the JavaScript engine and it is automatically garbage collected when it is no longer needed.
+
+//garbage collection :- it is the process of automatically freeing up memory that is no longer being used by the program. in JavaScript, garbage collection is done automatically by the JavaScript engine, which uses a technique called reference counting to keep track of which objects are still being used and which can be safely removed from memory. when an object is no longer referenced by any part of the program, it becomes eligible for garbage collection and the memory it occupies can be reclaimed by the system. however, if there are circular references or if closures are not handled properly, it can lead to memory leaks where memory is not freed up even though it is no longer needed.
+
+//mark and sweep algorithm :- it is a garbage collection algorithm that is used by the JavaScript engine to free up memory that is no longer being used. it works by marking all the objects that are still being used and then sweeping through the memory heap to free up the memory occupied by the unmarked objects. this algorithm is efficient and it helps to prevent memory leaks in JavaScript applications.
+
+//inlining
+//copy elision
+//inline cashing
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//v8 engine is a JavaScript engine developed by Google for the Chrome browser. it is designed to improve the performance of JavaScript code by using a combination of just-in-time (JIT) compilation and optimization techniques. v8 uses a technique called inline caching to optimize property access and method calls, which can significantly improve the performance of JavaScript code. it also uses a technique called copy elision to optimize the creation of objects and arrays, which can further improve performance. overall, v8 is a powerful JavaScript engine that helps to make web applications faster and more responsive.
+
+//terbo fan is a JavaScript engine developed by Google for the Chrome browser. it is designed to improve the performance of JavaScript code by using a combination of just-in-time (JIT) compilation and optimization techniques. terbo fan uses a technique called inline caching to optimize property access and method calls, which can significantly improve the performance of JavaScript code. it also uses a technique called copy elision to optimize the creation of objects and arrays, which can further improve performance. overall, terbo fan is a powerful JavaScript engine that helps to make web applications faster and more responsive.
+
+
+//orinoco is a JavaScript engine developed by Mozilla for the Firefox browser. it is designed to improve the performance of JavaScript code by using a combination of just-in-time (JIT) compilation and optimization techniques. orinoco uses a technique called inline caching to optimize property access and method calls, which can significantly improve the performance of JavaScript code. it also uses a technique called copy elision to optimize the creation of objects and arrays, which can further improve performance. overall, orinoco is a powerful JavaScript engine that helps to make web applications faster and more responsive.
+
+//both the browser and the node js have the runtime environment for javascript
+// and it constitute the hart of the javascript  environmetnt it have access to the api , call back queue, event loop, microtask queue and the call stack. it also have access to the memory heap and garbage collection. it also have access to the ECMAScript specification which defines the syntax, semantics, and behavior of the language. the runtime environment is responsible for executing the JavaScript code and providing access to the various features of the language.
+
+//javascript engine it have many phases the code it go through the parsing phase then the compilation phase and then the execution phase. in the parsing phase it will token are generated and it will create an abstract syntax tree (AST) which is a tree representation of the code.  then it pass to the interpretter then the compilation phase it will convert the AST into bytecode which is a low-level representation of the code that can be executed by the JavaScript engine. in the execution phase it will execute the bytecode and produce the output. the JavaScript engine also uses a technique called just-in-time (JIT) compilation to optimize the code for better performance. it also uses a technique called inline caching to optimize property access and method calls, which can significantly improve the performance of JavaScript code.it uses the memory heap and the call stack to manage memory and execute the code. it also uses garbage collection to free up memory that is no longer being used by the program. overall, the JavaScript engine is a powerful tool that helps to make web applications faster and more responsive by optimizing the execution of JavaScript code.
+// so many optimization techniques are used by the JavaScript engine to improve the performance of JavaScript code, such as inlining, copy elision, and inline caching. these techniques help to reduce the overhead of function calls and property access, which can significantly improve the performance of JavaScript code. overall, the JavaScript engine is a complex and powerful tool that helps to make web applications faster and more responsive by optimizing the execution of JavaScript code.
+//inlining is a technique used by the JavaScript engine to optimize function calls by replacing the function call with the actual code of the function. this can help to reduce the overhead of function calls and improve performance, especially for small functions that are called frequently.
+//copy elision is a technique used by the JavaScript engine to optimize the creation of objects and arrays by eliminating unnecessary copying of data. this can help to reduce memory usage and improve performance, especially for large objects and arrays.
+//inline caching is a technique used by the JavaScript engine to optimize property access and method calls by caching the results of previous property lookups and method calls. this can help to reduce the overhead of property access and method calls and improve performance, especially for frequently accessed properties and methods.
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//trust issues with setTimeout and setInterval
+
+//setTimeout and setInterval are not always reliable because they are based on the event loop and the callback queue, which can be affected by other tasks that are running in the call stack. if there are other tasks that are running in the call stack, it can delay the execution of the callback function and cause it to run later than expected. this can lead to unexpected behavior in your code, especially if you are relying on setTimeout or setInterval to perform time-sensitive tasks. it is important to be aware of these potential issues and to use setTimeout and setInterval with caution, especially in situations where timing is critical.
+//eg:
+
+console.log("start");
+
+setTimeout(function cb() {
+    console.log("callback function");
+}, 5000);
+
+console.log("end");
+
+//in this example, the callback function will be executed after 5 seconds, but if there are other tasks that are running in the call stack, it can delay the execution of the callback function and cause it to run later than expected. this can lead to unexpected behavior in your code, especially if you are relying on setTimeout to perform time-sensitive tasks. it is important to be aware of these potential issues and to use setTimeout with caution, especially in situations where timing is critical.
+
+//concurency model
+
+// set a timeout for 5 seconds
+console.log("start");
+setTimeout(function cb() {
+    console.log("callback function");
+}, 5000);
+
+console.log("end");
+
+//million code for eg take one eg
+
+console.log("start");
+setTimeout(function cb() {
+    console.log("callback function");
+}, 5000);
+
+console.log("end");
+
+//million code for eg take one eg
+
+let start = Date.now();
+let enddate = start;
+while (enddate < start + 10000) {
+    enddate = Date.now();
+}
+console.log("while loop finished");
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
 
 

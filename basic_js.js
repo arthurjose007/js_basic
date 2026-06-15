@@ -795,4 +795,96 @@ console.log("while loop finished");
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
+//Higher -Order Funciton 
+function x() {
+    console.log("x function");
+}
+function y(x) {
+    x();
+}
+y(x);
+
+//////////////////////////////////////////////////
+
+const radius = [3, 1, 2, 4];
+const area = function (radius) {
+    // return Math.PI * radius * radius;
+    const output = [];
+    for (let i = 0; i < radius.length; i++) {
+        output.push(Math.PI * radius[i] * radius[i]);
+    }
+    return output;
+};
+console.log(area(radius));
+
+
+
+const calculateCircumference = function (radius) {
+    const output = [];
+    for (let i = 0; i < radius.length; i++) {
+        output.push(2 * Math.PI * radius[i]);
+    }
+    return output;
+}
+console.log(calculateCircumference(radius));
+
+
+// const calculateDiameter = function (radius) {
+//     const output = [];
+//     for (let i = 0; i < radius.length; i++) {
+//         output.push(2 * radius[i]);
+//     }
+//     return output;
+// }
+// console.log(calculateDiameter(radius));
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const areanew= function (radius) {
+    return Math.PI * radius * radius;
+};
+const circumference = function (radius) {
+    return 2 * Math.PI * radius;
+};
+const diameter = function (radius) {
+    return 2 * radius;
+}
+
+const caluculate=function (radius, logic) {
+    const output = [];
+    for (let i = 0; i < radius.length; i++) {
+        output.push(logic(radius[i]));
+    }
+    return output;
+};
+const radius = [3, 1, 2, 4];
+console.log(radius.map(areanew));//almost similear
+
+
+console.log(caluculate(radius, areanew));
+
+console.log(caluculate(radius, circumference));
+
+console.log(caluculate(radius, diameter));
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 
